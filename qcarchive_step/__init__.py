@@ -8,7 +8,8 @@ A SEAMM plug-in for QCArchive
 # Bring up the classes so that they appear to be directly in
 # the qcarchive_step package.
 
-from .qcarchive import QCArchive  # noqa: F401, E501from .qcarchive_parameters import QCArchiveParameters  # noqa: F401, E501
+from .qcarchive import QCArchive  # noqa: F401, E501
+from .qcarchive_parameters import QCArchiveParameters  # noqa: F401, E501
 from .qcarchive_step import QCArchiveStep  # noqa: F401, E501
 from .tk_qcarchive import TkQCArchive  # noqa: F401, E501
 

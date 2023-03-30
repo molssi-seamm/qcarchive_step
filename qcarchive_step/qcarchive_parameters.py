@@ -74,25 +74,65 @@ class QCArchiveParameters(seamm.Parameters):
     """
 
     parameters = {
-        "time": {
-            "default": 100.0,
-            "kind": "float",
-            "default_units": "ps",
-            "enumeration": tuple(),
-            "format_string": ".1f",
-            "description": "Simulation time:",
-            "help_text": ("The time to simulate in the dynamics run."),
+        "operation": {
+            "default": "add configuration",
+            "kind": "enum",
+            "default_units": "",
+            "enumeration": (
+                "create new dataset",
+                "add configuration",
+                "list entries",
+                "get entries",
+            ),
+            "format_string": "s",
+            "description": "What to do:",
+            "help_text": "What to do with the dataset in QCArchive.",
         },
-        # # Results handling ... uncomment if needed
-        # "results": {
-        #     "default": {},
-        #     "kind": "dictionary",
-        #     "default_units": "",
-        #     "enumeration": tuple(),
-        #     "format_string": "",
-        #     "description": "results",
-        #     "help_text": "The results to save to variables or in tables.",
-        # },
+        "type of dataset": {
+            "default": "singlepoint",
+            "kind": "enum",
+            "default_units": "",
+            "enumeration": ("singlepoint", "optimization"),
+            "format_string": "s",
+            "description": "Dataset type:",
+            "help_text": "The type of the dataset.",
+        },
+        "dataset": {
+            "default": "",
+            "kind": "string",
+            "default_units": "",
+            "enumeration": tuple(),
+            "format_string": "s",
+            "description": "Dataset:",
+            "help_text": "The name of the dataset.",
+        },
+        "exist_ok": {
+            "default": "yes",
+            "kind": "boolean",
+            "default_units": "",
+            "enumeration": ("yes", "no"),
+            "format_string": "s",
+            "description": "Ok if already exists:",
+            "help_text": "Whether it is OK if the dataset already exists.",
+        },
+        "description": {
+            "default": "",
+            "kind": "string",
+            "default_units": "",
+            "enumeration": tuple(),
+            "format_string": "s",
+            "description": "Description:",
+            "help_text": "The description of the dataset.",
+        },
+        "tags": {
+            "default": "",
+            "kind": "string",
+            "default_units": "",
+            "enumeration": tuple(),
+            "format_string": "s",
+            "description": "Tags:",
+            "help_text": "The tags for the new dataset, a comma separated list.",
+        },
     }
 
     def __init__(self, defaults={}, data=None):
@@ -116,5 +156,10 @@ class QCArchiveParameters(seamm.Parameters):
         logger.debug("QCArchiveParameters.__init__")
 
         super().__init__(
-            defaults={**QCArchiveParameters.parameters, **defaults}, data=data
+            defaults={
+                **QCArchiveParameters.parameters,
+                **seamm.standard_parameters.structure_handling_parameters,
+                **defaults,
+            },
+            data=data,
         )

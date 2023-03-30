@@ -1,7 +1,9 @@
 Welcome to the documentation for the QCArchive SEAMM plug-in
 ============================================================
 
-QCArchive <does what? replace this text>
+The QCArchive step allows you to add molecules to and get molecules from a QCArchive
+database, using QCArchive datasets. For more information on QCArchive, see its
+`documentation <https://qcarchive.molssi.org>`_.
 
 .. grid:: 1 1 2 2
 

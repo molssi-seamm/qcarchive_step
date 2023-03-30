@@ -6,7 +6,9 @@
 import logging
 from pathlib import Path
 import pkg_resources
-import pprint  # noqa: F401
+
+from qcportal import PortalClient
+from qcportal.molecules import Molecule
 
 import qcarchive_step
 import molsystem
@@ -60,11 +62,7 @@ class QCArchive(seamm.Node):
     """
 
     def __init__(
-        self,
-        flowchart=None,
-        title="QCArchive",
-        extension=None,
-        logger=logger
+        self, flowchart=None, title="QCArchive", extension=None, logger=logger
     ):
         """A step for QCArchive in a SEAMM flowchart.
 
@@ -91,14 +89,15 @@ class QCArchive(seamm.Node):
 
         super().__init__(
             flowchart=flowchart,
-            title="QCArchive",
+            title=title,
             extension=extension,
-            module=__name__,
             logger=logger,
         )  # yapf: disable
 
         self._metadata = qcarchive_step.metadata
         self.parameters = qcarchive_step.QCArchiveParameters()
+        self._qc_client = None
+        self._dataset = None
 
     @property
     def version(self):
@@ -109,6 +108,61 @@ class QCArchive(seamm.Node):
     def git_revision(self):
         """The git version of this module."""
         return qcarchive_step.__git_revision__
+
+    @property
+    def qc_client(self):
+        """The Portal client."""
+        if self._qc_client is None:
+            try:
+                self._qc_client = PortalClient.from_file()
+            except Exception as e:
+                raise RuntimeError(f"Error {e} attaching to QCArchive.")
+        return self._qc_client
+
+    @property
+    def dataset(self):
+        """The dataset in QCArchive."""
+        if self._dataset is None:
+            P = self.parameters.current_values_to_dict(
+                context=seamm.flowchart_variables._data
+            )
+            operation = P["operation"]
+            ds_type = P["type of dataset"]
+            dataset = P["dataset"]
+
+            datasets = []
+            for d in self.qc_client.list_datasets():
+                if d["dataset_type"] == ds_type:
+                    datasets.append(d["dataset_name"])
+
+            if operation == "add configuration" and dataset not in datasets:
+                self._dataset = self.qc_client.add_dataset(
+                    ds_type,
+                    name=dataset,
+                    description="created by SEAMM",
+                    default_tag="basis",
+                )
+            else:
+                try:
+                    self._dataset = self.qc_client.get_dataset(
+                        ds_type, dataset_name=dataset
+                    )
+                except Exception as e:
+                    raise RuntimeError(f"Error {e} getting dataset {dataset}.")
+        return self._dataset
+
+    def datasets(self, _type="all"):
+        """The current datasets in QCArchive."""
+        datasets = []
+        if _type == "all":
+            for d in self.qc_client.list_datasets():
+                datasets.append((d["dataset_name"], d["dataset_type"]))
+        else:
+            for d in self.qc_client.list_datasets():
+                if d["dataset_type"] == _type:
+                    datasets.append(d["dataset_name"])
+
+        return datasets
 
     def description_text(self, P=None):
         """Create the text description of what this step will do.
@@ -128,11 +182,34 @@ class QCArchive(seamm.Node):
         if not P:
             P = self.parameters.values_to_dict()
 
-        text = (
-            "Please replace this with a short summary of the "
-            "QCArchive step, including key parameters."
-        )
-
+        operation = P["operation"]
+        if operation == "create new dataset":
+            text = (
+                f"Will create a new {P['type of dataset']}  dataset {P['dataset']} "
+                f"in the {self.qc_client.server_name}"
+            )
+            if P["exist_ok"] == "yes":
+                text += ", if it does not already exist."
+            else:
+                text += "."
+        elif operation == "add configuration":
+            text = (
+                f"Will add the current configuration to the {P['type of dataset']} "
+                f"dataset {P['dataset']} in the {self.qc_client.server_name}."
+            )
+        elif operation == "list entries":
+            text = (
+                f"Will list the entries in the {P['type of dataset']} "
+                f"dataset {P['dataset']} in the {self.qc_client.server_name}."
+            )
+        elif operation == "get entries":
+            text = (
+                f"Will get the entries from the {P['type of dataset']} "
+                f"dataset {P['dataset']} in the {self.qc_client.server_name}, "
+                "creating a new system and configuration for each."
+            )
+        else:
+            raise RuntimeError(f"Don't recognize the requested operation '{operation}'")
         return self.header + "\n" + __(text, **P, indent=4 * " ").__str__()
 
     def run(self):
@@ -156,59 +233,85 @@ class QCArchive(seamm.Node):
         # Print what we are doing
         printer.important(__(self.description_text(P), indent=self.indent))
 
-        directory = Path(self.directory)
-        directory.mkdir(parents=True, exist_ok=True)
+        # directory = Path(self.directory)
+        # directory.mkdir(parents=True, exist_ok=True)
 
-        # Get the current system and configuration (ignoring the system...)
-        _, configuration = self.get_system_configuration(None)
-
-        # Results data
-        data = {}
-
-        # Temporary code just to print the parameters. You will need to change
-        # this!
-        for key in P:
-            print("{:>15s} = {}".format(key, P[key]))
-            printer.normal(
-                __(
-                    "{key:>15s} = {value}",
-                    key=key,
-                    value=P[key],
-                    indent=4 * " ",
-                    wrap=False,
-                    dedent=False,
+        operation = P["operation"]
+        if operation == "create new dataset":
+            datasets = self.datasets(P["type of dataset"])
+            if P["dataset"] not in datasets:
+                tags = [t.strip() for t in P["tags"].split(",")]
+                self.qc_client.add_dataset(
+                    P["type of dataset"],
+                    name=P["dataset"],
+                    description=P["description"],
+                    tags=tags,
                 )
-            )
+                text = f"Created {P['type of dataset']} dataset {P['dataset']}."
+                printer.important(__(text, indent=self.indent))
+            elif P["exist_ok"]:
+                text = (
+                    f"The {P['type of dataset']} dataset {P['dataset']} already "
+                    "existed, so not creating it again."
+                )
+                printer.important(__(text, indent=self.indent))
+            else:
+                raise RuntimeError(
+                    f"The {P['type of dataset']} dataset {P['dataset']} exists already."
+                )
+        elif operation == "add configuration":
+            # Get the current system and configuration
+            system, configuration = self.get_system_configuration(None)
 
-        # Analyze the results
-        self.analyze()
-        # Put any requested results into variables or tables
-        self.store_results(
-            configuration=configuration,
-            data=data,
-        )
+            qcschema = configuration.to_qcschema_dict()
+            if "fragments" in qcschema:
+                del qcschema["fragments"]
+            molecule = Molecule(**qcschema)
+            entry_name = f"{system.name}/{configuration.name}"
+            self.dataset.add_entry(name=entry_name, molecule=molecule)
+            text = f"Added {entry_name} to the dataset."
+            printer.important(__(text, indent=self.indent))
+        elif operation == "list entries":
+            # for entry in self.dataset.iterate_entries():
+            #     print(entry)
+            entry_names = self.dataset.entry_names
+            text = (
+                f"There are {len(entry_names)} entries in the {P['type of dataset']} "
+                f"dataset {P['dataset']}:\n"
+            )
+            for entry in entry_names:
+                text += f"\t{entry}\n"
+            printer.important(__(text, indent=self.indent, dedent=False, wrap=False))
+        elif operation == "get entries":
+            system_db = self.get_variable("_system_db")
+            system, configuration = self.get_system_configuration(
+                P, structure_handling=True
+            )
+            subsequent_as_configurations = (
+                P["subsequent structure handling"] == "Create a new configuration"
+            )
+            first = True
+            for entry in self.dataset.iterate_entries():
+                json_data = entry.molecule.json()
+                if first:
+                    first = False
+                else:
+                    if subsequent_as_configurations:
+                        configuration = system.create_configuration()
+                    else:
+                        system = system_db.create_system()
+                        configuration = system.create_configuration()
+                configuration.from_qcschema_json(json_data)
+                if "/" in entry.molecule.name:
+                    sysname, confname = entry.molecule.name.split("/", 1)
+                    system.name = sysname.strip()
+                    configuration.name = confname.strip()
+                else:
+                    system.name = entry.molecule.name.strip()
+                    configuration.name = configuration.canonical_smiles
+
         # Add other citations here or in the appropriate place in the code.
         # Add the bibtex to data/references.bib, and add a self.reference.cite
         # similar to the above to actually add the citation to the references.
 
         return next_node
-
-    def analyze(self, indent="", **kwargs):
-        """Do any analysis of the output from this step.
-
-        Also print important results to the local step.out file using
-        "printer".
-
-        Parameters
-        ----------
-        indent: str
-            An extra indentation for the output
-        """
-        printer.normal(
-            __(
-                "This is a placeholder for the results from the QCArchive step",
-                indent=4 * " ",
-                wrap=True,
-                dedent=False,
-            )
-        )

@@ -33,7 +33,7 @@ class QCArchiveStep(object):
 
     my_description = {
         "description": "An interface for QCArchive",
-        "group": "Simulations",
+        "group": "Data",
         "name": "QCArchive",
     }
 

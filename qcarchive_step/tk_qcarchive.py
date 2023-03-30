@@ -2,12 +2,17 @@
 
 """The graphical part of a QCArchive step"""
 
-import pprint  # noqa: F401
+import logging
+import tkinter as tk
+
+from qcportal import PortalClient
 
 import qcarchive_step  # noqa: F401
 import seamm
 from seamm_util import ureg, Q_, units_class  # noqa: F401
 import seamm_widgets as sw
+
+logger = logging.getLogger(__name__)
 
 
 class TkQCArchive(seamm.TkNode):
@@ -84,6 +89,9 @@ class TkQCArchive(seamm.TkNode):
         """
         self.dialog = None
 
+        self._qc_client = None
+        self.have_client = None
+
         super().__init__(
             tk_flowchart=tk_flowchart,
             node=node,
@@ -93,6 +101,22 @@ class TkQCArchive(seamm.TkNode):
             w=w,
             h=h,
         )
+
+    @property
+    def qc_client(self):
+        """The Portal client."""
+        if self.have_client is not None and self.have_client:
+            return self._qc_client
+
+        if self._qc_client is None:
+            try:
+                self._qc_client = PortalClient.from_file()
+            except Exception as e:
+                logger.warning(f"Error {e} attaching to QCArchive.")
+                self.have_client = False
+            else:
+                self.have_client = True
+        return self._qc_client
 
     def create_dialog(self):
         """
@@ -119,26 +143,19 @@ class TkQCArchive(seamm.TkNode):
 
         # Then create the widgets
         for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
-            ):
-                self[key] = P[key].widget(frame)
+            self[key] = P[key].widget(frame)
+
+        # And bindings to be responsive to changes
+        for key in ("operation", "type of dataset"):
+            self[key].bind("<<ComboboxSelected>>", self.reset_dialog)
+            self[key].combobox.bind("<Return>", self.reset_dialog)
+            self[key].combobox.bind("<FocusOut>", self.reset_dialog)
 
         # and lay them out
         self.reset_dialog()
 
     def reset_dialog(self, widget=None):
         """Layout the widgets in the dialog.
-
-        The widgets are chosen by default from the information in
-        QCArchive_parameter.
-
-        This function simply lays them out row by row with
-        aligned labels. You may wish a more complicated layout that
-        is controlled by values of some of the control parameters.
-        If so, edit or override this method
 
         Parameters
         ----------
@@ -153,37 +170,66 @@ class TkQCArchive(seamm.TkNode):
         TkQCArchive.create_dialog
         """
 
-        # Remove any widgets previously packed
+        operation = self["operation"].get()
+        dataset_type = self["type of dataset"].get()
+
+        # Remove all the current widgets
         frame = self["frame"]
         for slave in frame.grid_slaves():
             slave.grid_forget()
 
-        # Shortcut for parameters
-        P = self.node.parameters
-
-        # keep track of the row in a variable, so that the layout is flexible
-        # if e.g. rows are skipped to control such as "method" here
-        row = 0
+        # Reconstruct based on current parameters
         widgets = []
-        for key in P:
-            if key[0] != "_" and key not in (
-                "results",
-                "extra keywords",
-                "create tables",
+        row = 0
+        key = "operation"
+        self[key].grid(row=row, column=0, sticky=tk.EW)
+        widgets.append(self[key])
+        row += 1
+
+        if operation == "create new dataset":
+            for key in (
+                "type of dataset",
+                "dataset",
+                "description",
+                "tags",
+                "exist_ok",
+            ):
+                self[key].grid(row=row, column=0, sticky=tk.EW)
+                widgets.append(self[key])
+                row += 1
+        elif operation == "add configuration":
+            for key in ("type of dataset", "dataset"):
+                self[key].grid(row=row, column=0, sticky=tk.EW)
+                widgets.append(self[key])
+                row += 1
+        elif operation == "list entries":
+            for key in ("type of dataset", "dataset"):
+                self[key].grid(row=row, column=0, sticky=tk.EW)
+                widgets.append(self[key])
+                row += 1
+        elif operation == "get entries":
+            for key in (
+                "type of dataset",
+                "dataset",
+                "structure handling",
+                "subsequent structure handling",
             ):
                 self[key].grid(row=row, column=0, sticky=tk.EW)
                 widgets.append(self[key])
                 row += 1
 
-        # Align the labels
         sw.align_labels(widgets, sticky=tk.E)
 
-        # Setup the results if there are any
-        have_results = (
-            "results" in self.node.metadata and len(self.node.metadata["results"]) > 0
-        )
-        if have_results and "results" in P:
-            self.setup_results()
+        if operation == "create new dataset":
+            datasets = []
+        else:
+            client = self.qc_client
+            if client is not None:
+                datasets = []
+                for d in client.list_datasets():
+                    if d["dataset_type"] == dataset_type:
+                        datasets.append(d["dataset_name"])
+                        self["dataset"].config(values=datasets)
 
     def right_click(self, event):
         """
