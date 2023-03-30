@@ -2,7 +2,10 @@
 History
 =======
 
-2023.3.28 (2023-03-28)
-----------------------
+2023.3.30 -- Initial working version, with documentation.
 
-* Plug-in created using the SEAMM plug-in cookiecutter.
+    With the following functionality:
+
+        * Creation of QCArchive datasets from SEAMM
+	* Adding structures to entries in a dataset
+	* Retrieving structures from a QCArchive dataset back into SEAMM
