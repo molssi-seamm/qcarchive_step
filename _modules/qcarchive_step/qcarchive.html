@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qcarchive_step.qcarchive &#8212; SEAMM QCArchive Plug-in 2023.3.30 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/qcarchive_step/qcarchive';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/SEAMM logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/SEAMM Inverted 288x181.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">QCArchive</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../developer_guide/index.html">
+                        Developer Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Documentation
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../authors.html">
+                        Development Team
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../history.html">
+                        History
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+                        Main SEAMM documentation
+                      </a>
+                    </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+                    SEAMM Documentation
+                  </a>
+                </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://molssi.org">
+                    MolSSI
+                  </a>
+                </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/geometry_analysis_step" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User Guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../developer_guide/index.html">
+                        Developer Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API Documentation
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../authors.html">
+                        Development Team
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../history.html">
+                        History
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+                        Main SEAMM documentation
+                      </a>
+                    </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://molssi-seamm.github.io">
+                    SEAMM Documentation
+                  </a>
+                </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://molssi.org">
+                    MolSSI
+                  </a>
+                </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/molssi-seamm/geometry_analysis_step" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/MolSSI_NSF" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-twitter"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">qcarchive_step.qcarchive</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <h1>Source code for qcarchive_step.qcarchive</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;Non-graphical part of the QCArchive step in a SEAMM flowchart</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+
+<span class="kn">from</span> <span class="nn">qcportal</span> <span class="kn">import</span> <span class="n">PortalClient</span>
+<span class="kn">from</span> <span class="nn">qcportal.molecules</span> <span class="kn">import</span> <span class="n">Molecule</span>
+
+<span class="kn">import</span> <span class="nn">qcarchive_step</span>
+<span class="kn">import</span> <span class="nn">molsystem</span>
+<span class="kn">import</span> <span class="nn">seamm</span>
+<span class="kn">from</span> <span class="nn">seamm_util</span> <span class="kn">import</span> <span class="n">ureg</span><span class="p">,</span> <span class="n">Q_</span>  <span class="c1"># noqa: F401</span>
+<span class="kn">import</span> <span class="nn">seamm_util.printing</span> <span class="k">as</span> <span class="nn">printing</span>
+<span class="kn">from</span> <span class="nn">seamm_util.printing</span> <span class="kn">import</span> <span class="n">FormattedText</span> <span class="k">as</span> <span class="n">__</span>
+
+<span class="c1"># In addition to the normal logger, two logger-like printing facilities are</span>
+<span class="c1"># defined: &quot;job&quot; and &quot;printer&quot;. &quot;job&quot; send output to the main job.out file for</span>
+<span class="c1"># the job, and should be used very sparingly, typically to echo what this step</span>
+<span class="c1"># will do in the initial summary of the job.</span>
+<span class="c1">#</span>
+<span class="c1"># &quot;printer&quot; sends output to the file &quot;step.out&quot; in this steps working</span>
+<span class="c1"># directory, and is used for all normal output from this step.</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">printing</span><span class="o">.</span><span class="n">getPrinter</span><span class="p">()</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">printing</span><span class="o">.</span><span class="n">getPrinter</span><span class="p">(</span><span class="s2">&quot;QCArchive&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add this module&#39;s properties to the standard properties</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;data/&quot;</span><span class="p">))</span>
+<span class="n">csv_file</span> <span class="o">=</span> <span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;properties.csv&quot;</span>
+<span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">molsystem</span><span class="o">.</span><span class="n">add_properties_from_file</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="QCArchive"><a class="viewcode-back" href="../../developer/qcarchive_step.html#qcarchive_step.qcarchive.QCArchive">[docs]</a><span class="k">class</span> <span class="nc">QCArchive</span><span class="p">(</span><span class="n">seamm</span><span class="o">.</span><span class="n">Node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The non-graphical part of a QCArchive step in a flowchart.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parser : configargparse.ArgParser</span>
+<span class="sd">        The parser object.</span>
+
+<span class="sd">    options : tuple</span>
+<span class="sd">        It contains a two item tuple containing the populated namespace and the</span>
+<span class="sd">        list of remaining argument strings.</span>
+
+<span class="sd">    subflowchart : seamm.Flowchart</span>
+<span class="sd">        A SEAMM Flowchart object that represents a subflowchart, if needed.</span>
+
+<span class="sd">    parameters : QCArchiveParameters</span>
+<span class="sd">        The control parameters for QCArchive.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    TkQCArchive,</span>
+<span class="sd">    QCArchive, QCArchiveParameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">flowchart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;QCArchive&quot;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logger</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A step for QCArchive in a SEAMM flowchart.</span>
+
+<span class="sd">        You may wish to change the title above, which is the string displayed</span>
+<span class="sd">        in the box representing the step in the flowchart.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        flowchart: seamm.Flowchart</span>
+<span class="sd">            The non-graphical flowchart that contains this step.</span>
+
+<span class="sd">        title: str</span>
+<span class="sd">            The name displayed in the flowchart.</span>
+<span class="sd">        extension: None</span>
+<span class="sd">            Not yet implemented</span>
+<span class="sd">        logger : Logger = logger</span>
+<span class="sd">            The logger to use and pass to parent classes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating QCArchive </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">flowchart</span><span class="o">=</span><span class="n">flowchart</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">extension</span><span class="o">=</span><span class="n">extension</span><span class="p">,</span>
+            <span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># yapf: disable</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span> <span class="o">=</span> <span class="n">qcarchive_step</span><span class="o">.</span><span class="n">metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">qcarchive_step</span><span class="o">.</span><span class="n">QCArchiveParameters</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_qc_client</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The semantic version of this module.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">qcarchive_step</span><span class="o">.</span><span class="n">__version__</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">git_revision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The git version of this module.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">qcarchive_step</span><span class="o">.</span><span class="n">__git_revision__</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">qc_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The Portal client.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qc_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_qc_client</span> <span class="o">=</span> <span class="n">PortalClient</span><span class="o">.</span><span class="n">from_file</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> attaching to QCArchive.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qc_client</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The dataset in QCArchive.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">current_values_to_dict</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">seamm</span><span class="o">.</span><span class="n">flowchart_variables</span><span class="o">.</span><span class="n">_data</span>
+            <span class="p">)</span>
+            <span class="n">operation</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span>
+            <span class="n">ds_type</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;type of dataset&quot;</span><span class="p">]</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
+
+            <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ds_type</span><span class="p">:</span>
+                    <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_name&quot;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;add configuration&quot;</span> <span class="ow">and</span> <span class="n">dataset</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">add_dataset</span><span class="p">(</span>
+                    <span class="n">ds_type</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+                    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;created by SEAMM&quot;</span><span class="p">,</span>
+                    <span class="n">default_tag</span><span class="o">=</span><span class="s2">&quot;basis&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span>
+                        <span class="n">ds_type</span><span class="p">,</span> <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset</span>
+                    <span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2"> getting dataset </span><span class="si">{</span><span class="n">dataset</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span>
+
+<div class="viewcode-block" id="QCArchive.datasets"><a class="viewcode-back" href="../../developer/qcarchive_step.html#qcarchive_step.qcarchive.QCArchive.datasets">[docs]</a>    <span class="k">def</span> <span class="nf">datasets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_type</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The current datasets in QCArchive.&quot;&quot;&quot;</span>
+        <span class="n">datasets</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">_type</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">():</span>
+                <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_name&quot;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_type&quot;</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">_type</span><span class="p">:</span>
+                    <span class="n">datasets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;dataset_name&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">datasets</span></div>
+
+<div class="viewcode-block" id="QCArchive.description_text"><a class="viewcode-back" href="../../developer/qcarchive_step.html#qcarchive_step.qcarchive.QCArchive.description_text">[docs]</a>    <span class="k">def</span> <span class="nf">description_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the text description of what this step will do.</span>
+<span class="sd">        The dictionary of control values is passed in as P so that</span>
+<span class="sd">        the code can test values, etc.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        P: dict</span>
+<span class="sd">            An optional dictionary of the current values of the control</span>
+<span class="sd">            parameters.</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            A description of the current step.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">P</span><span class="p">:</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values_to_dict</span><span class="p">()</span>
+
+        <span class="n">operation</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;create new dataset&quot;</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Will create a new </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">  dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">server_name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;exist_ok&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;, if it does not already exist.&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;add configuration&quot;</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Will add the current configuration to the </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">server_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;list entries&quot;</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Will list the entries in the </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">server_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;get entries&quot;</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Will get the entries from the </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">server_name</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="s2">&quot;creating a new system and configuration for each.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Don&#39;t recognize the requested operation &#39;</span><span class="si">{</span><span class="n">operation</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">**</span><span class="n">P</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="QCArchive.run"><a class="viewcode-back" href="../../developer/qcarchive_step.html#qcarchive_step.qcarchive.QCArchive.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run a QCArchive step.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        seamm.Node</span>
+<span class="sd">            The next node object in the flowchart.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">next_node</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">printer</span><span class="p">)</span>
+        <span class="c1"># Get the values of the parameters, dereferencing any variables</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">current_values_to_dict</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">seamm</span><span class="o">.</span><span class="n">flowchart_variables</span><span class="o">.</span><span class="n">_data</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Print what we are doing</span>
+        <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description_text</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">))</span>
+
+        <span class="c1"># directory = Path(self.directory)</span>
+        <span class="c1"># directory.mkdir(parents=True, exist_ok=True)</span>
+
+        <span class="n">operation</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;create new dataset&quot;</span><span class="p">:</span>
+            <span class="n">datasets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datasets</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="s2">&quot;type of dataset&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+                <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;tags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">qc_client</span><span class="o">.</span><span class="n">add_dataset</span><span class="p">(</span>
+                    <span class="n">P</span><span class="p">[</span><span class="s2">&quot;type of dataset&quot;</span><span class="p">],</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">P</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">],</span>
+                    <span class="n">description</span><span class="o">=</span><span class="n">P</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+                    <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Created </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">P</span><span class="p">[</span><span class="s2">&quot;exist_ok&quot;</span><span class="p">]:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> already &quot;</span>
+                    <span class="s2">&quot;existed, so not creating it again.&quot;</span>
+                <span class="p">)</span>
+                <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> exists already.&quot;</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;add configuration&quot;</span><span class="p">:</span>
+            <span class="c1"># Get the current system and configuration</span>
+            <span class="n">system</span><span class="p">,</span> <span class="n">configuration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_configuration</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+            <span class="n">qcschema</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">to_qcschema_dict</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s2">&quot;fragments&quot;</span> <span class="ow">in</span> <span class="n">qcschema</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">qcschema</span><span class="p">[</span><span class="s2">&quot;fragments&quot;</span><span class="p">]</span>
+            <span class="n">molecule</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="o">**</span><span class="n">qcschema</span><span class="p">)</span>
+            <span class="n">entry_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">system</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">configuration</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">entry_name</span><span class="p">,</span> <span class="n">molecule</span><span class="o">=</span><span class="n">molecule</span><span class="p">)</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">entry_name</span><span class="si">}</span><span class="s2"> to the dataset.&quot;</span>
+            <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;list entries&quot;</span><span class="p">:</span>
+            <span class="c1"># for entry in self.dataset.iterate_entries():</span>
+            <span class="c1">#     print(entry)</span>
+            <span class="n">entry_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">entry_names</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">entry_names</span><span class="p">)</span><span class="si">}</span><span class="s2"> entries in the </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;type of dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;dataset </span><span class="si">{</span><span class="n">P</span><span class="p">[</span><span class="s1">&#39;dataset&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entry_names</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">entry</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">printer</span><span class="o">.</span><span class="n">important</span><span class="p">(</span><span class="n">__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">indent</span><span class="p">,</span> <span class="n">dedent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;get entries&quot;</span><span class="p">:</span>
+            <span class="n">system_db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_variable</span><span class="p">(</span><span class="s2">&quot;_system_db&quot;</span><span class="p">)</span>
+            <span class="n">system</span><span class="p">,</span> <span class="n">configuration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_system_configuration</span><span class="p">(</span>
+                <span class="n">P</span><span class="p">,</span> <span class="n">structure_handling</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="n">subsequent_as_configurations</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">P</span><span class="p">[</span><span class="s2">&quot;subsequent structure handling&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Create a new configuration&quot;</span>
+            <span class="p">)</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">iterate_entries</span><span class="p">():</span>
+                <span class="n">json_data</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">molecule</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+                    <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">subsequent_as_configurations</span><span class="p">:</span>
+                        <span class="n">configuration</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">create_configuration</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">system</span> <span class="o">=</span> <span class="n">system_db</span><span class="o">.</span><span class="n">create_system</span><span class="p">()</span>
+                        <span class="n">configuration</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">create_configuration</span><span class="p">()</span>
+                <span class="n">configuration</span><span class="o">.</span><span class="n">from_qcschema_json</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">molecule</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                    <span class="n">sysname</span><span class="p">,</span> <span class="n">confname</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">molecule</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="n">system</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">sysname</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">configuration</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">confname</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">system</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">molecule</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                    <span class="n">configuration</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">canonical_smiles</span>
+
+        <span class="c1"># Add other citations here or in the appropriate place in the code.</span>
+        <span class="c1"># Add the bibtex to data/references.bib, and add a self.reference.cite</span>
+        <span class="c1"># similar to the above to actually add the citation to the references.</span>
+
+        <span class="k">return</span> <span class="n">next_node</span></div></div>
+</pre></div>
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<div class="row h-10">
+    <div class="col-2">
+        <a href="https://molssi.org/" target="_blank" title="Go to MolSSI in a new tab">
+            <img src="../../_static/molssi_main_logo.png" class="logo__image only-light footer_logo" alt="Logo image">
+            <img src="../../_static/molssi_main_logo_inverted_white.png" class="logo__image only-dark footer_logo" alt="Logo image">
+        </a>
+    </div>
+    <div class="col-8">
+        <p> &copy; Copyright 2019-2023 <a href="https://molssi.org/">The Molecular Sciences Software Institute</a></p>
+        <p>Funded by the National Science Foundation 
+          <a href="https://nsf.gov/awardsearch/showAward?AWD_ID=1547580">OAC-1547580</a> and 
+          <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2136142">CHE-2136142.</a></p>
+ 
+        
+
+    </div>
+    <div class="col-2">
+        <a href="https://nsf.gov/" target="_blank" title="Go to the NSF in a new tab">
+            <img src="../../_static/nsf.png" class="footer_logo" alt="The NSF">
+          </a>
+    </div>
+</div>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
