@@ -268,7 +268,10 @@ class QCArchive(seamm.Node):
                 del qcschema["fragments"]
             molecule = Molecule(**qcschema)
             entry_name = f"{system.name}/{configuration.name}"
-            self.dataset.add_entry(name=entry_name, molecule=molecule)
+            if P["type of dataset"] == "optimization":
+                self.dataset.add_entry(name=entry_name, initial_molecule=molecule)
+            else:
+                self.dataset.add_entry(name=entry_name, molecule=molecule)
             text = f"Added {entry_name} to the dataset."
             printer.important(__(text, indent=self.indent))
         elif operation == "list entries":
