@@ -1,6 +1,7 @@
 =======
 History
 =======
+2026.3.1 -- Internal: switching from deprecated library pkg_resources to importlib
 
 2023.3.30 -- Initial working version, with documentation.
 

@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""Non-graphical part of the QCArchive step in a SEAMM flowchart
-"""
+"""Non-graphical part of the QCArchive step in a SEAMM flowchart"""
 
+import importlib
 import logging
-from pathlib import Path
-import pkg_resources
 
 from qcportal import PortalClient
 from qcportal.molecules import Molecule
@@ -30,7 +28,7 @@ job = printing.getPrinter()
 printer = printing.getPrinter("QCArchive")
 
 # Add this module's properties to the standard properties
-path = Path(pkg_resources.resource_filename(__name__, "data/"))
+path = importlib.resources.files("qcarchive_step") / "data"
 csv_file = path / "properties.csv"
 if path.exists():
     molsystem.add_properties_from_file(csv_file)
@@ -268,7 +266,10 @@ class QCArchive(seamm.Node):
                 del qcschema["fragments"]
             molecule = Molecule(**qcschema)
             entry_name = f"{system.name}/{configuration.name}"
-            self.dataset.add_entry(name=entry_name, molecule=molecule)
+            if P["type of dataset"] == "optimization":
+                self.dataset.add_entry(name=entry_name, initial_molecule=molecule)
+            else:
+                self.dataset.add_entry(name=entry_name, molecule=molecule)
             text = f"Added {entry_name} to the dataset."
             printer.important(__(text, indent=self.indent))
         elif operation == "list entries":

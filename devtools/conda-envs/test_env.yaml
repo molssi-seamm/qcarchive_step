@@ -9,7 +9,7 @@ dependencies:
   - pip
 
   # SEAMM
-  - qcarchive/label/next::qcportal
+  - qcportal
   - seamm
 
   # Testing
