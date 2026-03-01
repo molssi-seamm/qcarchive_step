@@ -1,0 +1,466 @@
+#!/usr/bin/env run_flowchart
+!MolSSI flowchart 2.0
+#metadata
+{
+    "title": "",
+    "description": "",
+    "keywords": [],
+    "creators": [
+        {
+            "name": "Saxe, Paul",
+            "orcid": "0000-0002-8641-9448",
+            "affiliation": "The Molecular Sciences Software Institute (MolSSI)"
+        }
+    ],
+    "sha256": "f2b6c9e2074fa7224331dd1a720f1e0ea320125527951aa0772728e2c9728695",
+    "sha256_strict": "a836bc1516498d2b51d673d444ed8e6803824b6d7d1bdf5c275882dd992c38db"
+}
+#flowchart
+{
+    "item": "object",
+    "module": "seamm.flowchart",
+    "class": "Flowchart",
+    "extension": null,
+    "nodes": [
+        {
+            "item": "object",
+            "module": "seamm.start_node",
+            "class": "StartNode",
+            "version": "2023.4.8+4.g67c7491.dirty",
+            "extension": null,
+            "attributes": {
+                "_tables": [],
+                "_title": "Start",
+                "_uuid": 1,
+                "extension": null,
+                "_method": null,
+                "parameters": null,
+                "x": 150,
+                "y": 35,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "qcarchive_step.qcarchive",
+            "class": "QCArchive",
+            "version": "2023.3.28+0.gf56933a.dirty",
+            "extension": "QCArchive",
+            "attributes": {
+                "_tables": [],
+                "_title": "QCArchive",
+                "_uuid": 10884357362045981966178024953889392065,
+                "extension": "QCArchive",
+                "_method": null,
+                "parameters": {
+                    "__class__": "QCArchiveParameters",
+                    "__module__": "qcarchive_step.qcarchive_parameters",
+                    "operation": {
+                        "value": "create new dataset",
+                        "units": null
+                    },
+                    "type of dataset": {
+                        "value": "singlepoint",
+                        "units": null
+                    },
+                    "dataset": {
+                        "value": "paul_test1",
+                        "units": null
+                    },
+                    "exist_ok": {
+                        "value": "yes",
+                        "units": null
+                    },
+                    "description": {
+                        "value": "A test dataset for Paul",
+                        "units": null
+                    },
+                    "tags": {
+                        "value": "test, Paul",
+                        "units": null
+                    },
+                    "structure handling": {
+                        "value": "Overwrite the current configuration",
+                        "units": null
+                    },
+                    "subsequent structure handling": {
+                        "value": "Create a new system and configuration",
+                        "units": null
+                    },
+                    "system name": {
+                        "value": "from file",
+                        "units": null
+                    },
+                    "configuration name": {
+                        "value": "use Canonical SMILES string",
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 175,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "control_parameters_step.control_parameters",
+            "class": "ControlParameters",
+            "version": "2023.1.23",
+            "extension": "Parameters",
+            "attributes": {
+                "_tables": [],
+                "_title": "Parameters",
+                "_uuid": 6971749024603266158099874962043028605,
+                "extension": "Parameters",
+                "_method": null,
+                "parameters": {
+                    "__class__": "ControlParametersParameters",
+                    "__module__": "control_parameters_step.control_parameters_parameters",
+                    "variables": {
+                        "value": {
+                            "SMILES": {
+                                "optional": "No",
+                                "type": "str",
+                                "nargs": "a single value",
+                                "overwrite": "No",
+                                "default": "",
+                                "choices": "[]",
+                                "help": "The SMILES for the molecule"
+                            }
+                        },
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 105,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "from_smiles_step.from_smiles",
+            "class": "FromSMILES",
+            "version": "2021.10.13",
+            "extension": "FromSMILESStep",
+            "attributes": {
+                "_tables": [],
+                "_title": "from SMILES",
+                "_uuid": 135701417393058614557192212907827727799,
+                "extension": "FromSMILESStep",
+                "_method": null,
+                "parameters": {
+                    "__class__": "FromSMILESParameters",
+                    "__module__": "from_smiles_step.from_smiles_parameters",
+                    "smiles string": {
+                        "value": "$SMILES",
+                        "units": null
+                    },
+                    "structure handling": {
+                        "value": "Overwrite the current configuration",
+                        "units": null
+                    },
+                    "subsequent structure handling": {
+                        "value": "Create a new system and configuration",
+                        "units": null
+                    },
+                    "system name": {
+                        "value": "use Canonical SMILES string",
+                        "units": null
+                    },
+                    "configuration name": {
+                        "value": "initial",
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 245,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "quickmin_step.quickmin",
+            "class": "QuickMin",
+            "version": "2023.1.14",
+            "extension": "QuickMin",
+            "attributes": {
+                "_tables": [],
+                "_title": "QuickMin",
+                "_uuid": 169904140125100733561343418732014368482,
+                "extension": "QuickMin",
+                "_method": null,
+                "parameters": {
+                    "__class__": "QuickMinParameters",
+                    "__module__": "quickmin_step.quickmin_parameters",
+                    "forcefield": {
+                        "value": "best available",
+                        "units": null
+                    },
+                    "n_steps": {
+                        "value": "1000",
+                        "units": null
+                    },
+                    "structure handling": {
+                        "value": "Create a new configuration",
+                        "units": null
+                    },
+                    "configuration name": {
+                        "value": "optimized with <Forcefield>",
+                        "units": null
+                    },
+                    "results": {
+                        "value": {
+                            "total energy": {
+                                "property": "total energy#QuickMin#{model}"
+                            }
+                        },
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 315,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "qcarchive_step.qcarchive",
+            "class": "QCArchive",
+            "version": "2023.3.28+0.gf56933a.dirty",
+            "extension": "QCArchive",
+            "attributes": {
+                "_tables": [],
+                "_title": "QCArchive",
+                "_uuid": 329567557071856651740844540106949727810,
+                "extension": "QCArchive",
+                "_method": null,
+                "parameters": {
+                    "__class__": "QCArchiveParameters",
+                    "__module__": "qcarchive_step.qcarchive_parameters",
+                    "operation": {
+                        "value": "add configuration",
+                        "units": null
+                    },
+                    "type of dataset": {
+                        "value": "singlepoint",
+                        "units": null
+                    },
+                    "dataset": {
+                        "value": "paul_test1",
+                        "units": null
+                    },
+                    "exist_ok": {
+                        "value": "yes",
+                        "units": null
+                    },
+                    "description": {
+                        "value": "",
+                        "units": null
+                    },
+                    "tags": {
+                        "value": "",
+                        "units": null
+                    },
+                    "structure handling": {
+                        "value": "Overwrite the current configuration",
+                        "units": null
+                    },
+                    "subsequent structure handling": {
+                        "value": "Create a new system and configuration",
+                        "units": null
+                    },
+                    "system name": {
+                        "value": "from file",
+                        "units": null
+                    },
+                    "configuration name": {
+                        "value": "use Canonical SMILES string",
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 385,
+                "w": 200,
+                "h": 50
+            }
+        },
+        {
+            "item": "object",
+            "module": "qcarchive_step.qcarchive",
+            "class": "QCArchive",
+            "version": "2023.3.28+0.gf56933a.dirty",
+            "extension": "QCArchive",
+            "attributes": {
+                "_tables": [],
+                "_title": "QCArchive",
+                "_uuid": 61103930149390572266393724847397341321,
+                "extension": "QCArchive",
+                "_method": null,
+                "parameters": {
+                    "__class__": "QCArchiveParameters",
+                    "__module__": "qcarchive_step.qcarchive_parameters",
+                    "operation": {
+                        "value": "list entries",
+                        "units": null
+                    },
+                    "type of dataset": {
+                        "value": "singlepoint",
+                        "units": null
+                    },
+                    "dataset": {
+                        "value": "paul_test1",
+                        "units": null
+                    },
+                    "exist_ok": {
+                        "value": "yes",
+                        "units": null
+                    },
+                    "description": {
+                        "value": "",
+                        "units": null
+                    },
+                    "tags": {
+                        "value": "",
+                        "units": null
+                    },
+                    "structure handling": {
+                        "value": "Overwrite the current configuration",
+                        "units": null
+                    },
+                    "subsequent structure handling": {
+                        "value": "Create a new system and configuration",
+                        "units": null
+                    },
+                    "system name": {
+                        "value": "from file",
+                        "units": null
+                    },
+                    "configuration name": {
+                        "value": "use Canonical SMILES string",
+                        "units": null
+                    }
+                },
+                "x": 150,
+                "y": 455,
+                "w": 200,
+                "h": 50
+            }
+        }
+    ],
+    "edges": [
+        {
+            "item": "edge",
+            "node1": 1,
+            "node2": 6971749024603266158099874962043028605,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    60,
+                    150,
+                    80
+                ],
+                "arrow_id": 1284
+            }
+        },
+        {
+            "item": "edge",
+            "node1": 6971749024603266158099874962043028605,
+            "node2": 10884357362045981966178024953889392065,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    130,
+                    150,
+                    150
+                ],
+                "arrow_id": 1285
+            }
+        },
+        {
+            "item": "edge",
+            "node1": 10884357362045981966178024953889392065,
+            "node2": 135701417393058614557192212907827727799,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    200,
+                    150,
+                    220
+                ],
+                "arrow_id": 1288
+            }
+        },
+        {
+            "item": "edge",
+            "node1": 135701417393058614557192212907827727799,
+            "node2": 169904140125100733561343418732014368482,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    270,
+                    150,
+                    290
+                ],
+                "arrow_id": 1292
+            }
+        },
+        {
+            "item": "edge",
+            "node1": 169904140125100733561343418732014368482,
+            "node2": 329567557071856651740844540106949727810,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    340,
+                    150,
+                    360
+                ],
+                "arrow_id": 1296
+            }
+        },
+        {
+            "item": "edge",
+            "node1": 329567557071856651740844540106949727810,
+            "node2": 61103930149390572266393724847397341321,
+            "edge_type": "execution",
+            "edge_subtype": "next",
+            "attributes": {
+                "anchor1": "s",
+                "anchor2": "n",
+                "coords": [
+                    150,
+                    410,
+                    150,
+                    430
+                ],
+                "arrow_id": 1318
+            }
+        }
+    ]
+}
+#end
